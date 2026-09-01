@@ -25,3 +25,7 @@ const deleteStory = (idToDelete: number) =>{
     stories = stories.filter(story => story.id !==idToDelete);
     localStorage.setItem("my_stories", JSON.stringify(stories));
 };
+
+export const getStories = ():Story[] =>{
+    return stories;
+}

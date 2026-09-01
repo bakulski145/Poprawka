@@ -1,4 +1,4 @@
-import { addStory, Story } from "./Story.js";
+import { addStory, Story } from "./story.js";
 export const storyRenderForm = (projectId) => {
     const storyFormContainer = document.querySelector(".story-form-container");
     storyFormContainer.innerHTML = `
@@ -20,5 +20,6 @@ export const storyRenderForm = (projectId) => {
     addStoryButton === null || addStoryButton === void 0 ? void 0 : addStoryButton.addEventListener("click", (event) => {
         event.preventDefault();
         addStory(new Story(Date.now(), storyNameElement.value, storyDescriptionElement.value, storyPrioElement.value, projectId, Date.now(), "todo", 1));
+        storyFormContainer.innerHTML = "";
     });
 };

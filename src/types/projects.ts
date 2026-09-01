@@ -1,4 +1,9 @@
-import { storyRenderForm } from "./StoryRenderForm.js";
+import { stories, Story, getStories } from "./story.js";
+import { renderStories } from "./storyRender.js";
+import { storyRenderForm } from "./storyRenderForm.js";
+
+const storiesElementContainer = document.querySelector(".stories") as HTMLElement;
+const allStories = getStories();
 
 export interface Project {
     id : number,
@@ -67,6 +72,7 @@ export const renderProjects =(projectContainerElement:HTMLElement, onEditRequest
         selectElement.addEventListener("click",(event: Event) => {
             event.preventDefault();
             setActiveProject(project.id);
+            renderStories(storiesElementContainer, allStories);
             renderProjects(projectContainerElement,onEditRequest);
         })
         const deleteElement = document.createElement("button");

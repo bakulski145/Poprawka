@@ -1,5 +1,5 @@
-import { addStory, Story } from "./Story.js";
-import type{ Prio } from "./Story.js";
+import { addStory, Story } from "./story.js";
+import type{ Prio } from "./story.js";
 export const storyRenderForm = (projectId: number) =>{
     const storyFormContainer = document.querySelector(".story-form-container") as HTMLElement;
     storyFormContainer.innerHTML = `
@@ -21,5 +21,6 @@ export const storyRenderForm = (projectId: number) =>{
     addStoryButton?.addEventListener("click",(event:Event)=>{
         event.preventDefault();
         addStory(new Story(Date.now(),storyNameElement.value,storyDescriptionElement.value,storyPrioElement.value as Prio,projectId,Date.now(), "todo",1));
+        storyFormContainer.innerHTML = "";
     })
 }
