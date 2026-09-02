@@ -1,4 +1,7 @@
-import { addStory, Story } from "./story.js";
+import { addStory, Story, getStories } from "./story.js";
+import { renderStories } from "./storyRender.js";
+export const storiesElementContainer = document.querySelector(".stories");
+const allStories = getStories();
 export const storyRenderForm = (projectId) => {
     const storyFormContainer = document.querySelector(".story-form-container");
     storyFormContainer.innerHTML = `
@@ -20,6 +23,10 @@ export const storyRenderForm = (projectId) => {
     addStoryButton === null || addStoryButton === void 0 ? void 0 : addStoryButton.addEventListener("click", (event) => {
         event.preventDefault();
         addStory(new Story(Date.now(), storyNameElement.value, storyDescriptionElement.value, storyPrioElement.value, projectId, Date.now(), "todo", 1));
+        const currentAllStories = getStories();
+        const currentProjectStories = currentAllStories.filter(story => Number(story.projectId) === Number(projectId));
+        const storiesElementContainer = document.querySelector(".stories");
+        renderStories(storiesElementContainer, currentProjectStories);
         storyFormContainer.innerHTML = "";
     });
 };

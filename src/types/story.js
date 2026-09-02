@@ -13,12 +13,18 @@ export class Story {
 }
 export const addStory = (story) => {
     stories.push(story);
-    localStorage.setItem("my_stories", JSON.stringify(story));
+    localStorage.setItem("my_stories", JSON.stringify(stories));
 };
-const deleteStory = (idToDelete) => {
+export const deleteStory = (idToDelete) => {
     stories = stories.filter(story => story.id !== idToDelete);
     localStorage.setItem("my_stories", JSON.stringify(stories));
 };
 export const getStories = () => {
     return stories;
+};
+export const loadStories = () => {
+    const savedStories = localStorage.getItem("my_stories");
+    if (savedStories) {
+        stories = JSON.parse(savedStories);
+    }
 };

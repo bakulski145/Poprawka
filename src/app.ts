@@ -1,6 +1,8 @@
 import * as ProjectManager from "./types/projects.js";
 import { renderUser } from "./types/userRender.js";
 import {User} from "./types/user.js";
+import { loadStories } from "./types/story.js";
+import { renderStories } from "./types/storyRender.js";
 const addButtonElement = document.querySelector("#add") as HTMLButtonElement;
 const projectNameInput = document.querySelector("#name") as HTMLInputElement;
 const projectDescriptionInput = document.querySelector("#description") as HTMLInputElement;
@@ -9,6 +11,7 @@ const userCointainer = document.querySelector(".user") as HTMLElement;
 
 let editingProjectId: number | null = null;
 ProjectManager.loadProjects();
+loadStories();
 
 const handleEditRequest = (project: ProjectManager.Project) => {
     projectNameInput.value = project.name;

@@ -18,10 +18,10 @@ export class Story {
 
 export const addStory = (story: Story) =>{
     stories.push(story);
-    localStorage.setItem("my_stories", JSON.stringify(story));
+    localStorage.setItem("my_stories", JSON.stringify(stories));
 };
 
-const deleteStory = (idToDelete: number) =>{
+export const deleteStory = (idToDelete: number) =>{
     stories = stories.filter(story => story.id !==idToDelete);
     localStorage.setItem("my_stories", JSON.stringify(stories));
 };
@@ -29,3 +29,10 @@ const deleteStory = (idToDelete: number) =>{
 export const getStories = ():Story[] =>{
     return stories;
 }
+
+export const loadStories = () => {
+    const savedStories = localStorage.getItem("my_stories");
+    if(savedStories) {
+        stories = JSON.parse(savedStories);
+    }
+};

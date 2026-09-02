@@ -59,6 +59,11 @@ export const renderProjects =(projectContainerElement:HTMLElement, onEditRequest
         projectElement.innerText = `${project.name} `;
         if(project.id === activeProjectId) {
             projectElement.style.border="3px solid black";
+
+            const currentAllStories = getStories();
+            const currentProjectStories = currentAllStories.filter(story => story.projectId === activeProjectId);
+            renderStories(storiesElementContainer, currentProjectStories);
+
             const addStoryButton = document.createElement("button");
             addStoryButton.innerHTML="Dodaj Story";
             projectElement.appendChild(addStoryButton);
@@ -72,7 +77,9 @@ export const renderProjects =(projectContainerElement:HTMLElement, onEditRequest
         selectElement.addEventListener("click",(event: Event) => {
             event.preventDefault();
             setActiveProject(project.id);
-            renderStories(storiesElementContainer, allStories);
+            const currentAllStories = getStories();   
+            const currentProjectStories = currentAllStories.filter(story => story.projectId === project.id)
+            renderStories(storiesElementContainer, currentProjectStories);
             renderProjects(projectContainerElement,onEditRequest);
         })
         const deleteElement = document.createElement("button");

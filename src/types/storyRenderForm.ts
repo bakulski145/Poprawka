@@ -1,5 +1,8 @@
-import { addStory, Story } from "./story.js";
+import { addStory, Story, getStories } from "./story.js";
 import type{ Prio } from "./story.js";
+import { renderStories } from "./storyRender.js";
+export const storiesElementContainer = document.querySelector(".stories") as HTMLElement;
+const allStories = getStories();
 export const storyRenderForm = (projectId: number) =>{
     const storyFormContainer = document.querySelector(".story-form-container") as HTMLElement;
     storyFormContainer.innerHTML = `
@@ -21,6 +24,10 @@ export const storyRenderForm = (projectId: number) =>{
     addStoryButton?.addEventListener("click",(event:Event)=>{
         event.preventDefault();
         addStory(new Story(Date.now(),storyNameElement.value,storyDescriptionElement.value,storyPrioElement.value as Prio,projectId,Date.now(), "todo",1));
+        const currentAllStories = getStories();
+        const currentProjectStories = currentAllStories.filter(story => Number(story.projectId) === Number(projectId));
+        const storiesElementContainer = document.querySelector(".stories") as HTMLElement;
+        renderStories(storiesElementContainer, currentProjectStories);
         storyFormContainer.innerHTML = "";
     })
 }
