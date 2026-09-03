@@ -28,3 +28,7 @@ export const loadStories = () => {
         stories = JSON.parse(savedStories);
     }
 };
+export const changeCondition = (storyToUpdate, newCondition) => {
+    storyToUpdate.condition = newCondition;
+    localStorage.setItem("my_stories", JSON.stringify(stories));
+};
