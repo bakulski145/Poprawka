@@ -3,6 +3,7 @@ import { renderUser } from "./types/userRender.js";
 import { User } from "./types/user.js";
 import { loadStories } from "./types/story.js";
 import { renderStories } from "./types/storyRender.js";
+import { loadTasks } from "./types/task.js";
 const addButtonElement = document.querySelector("#add");
 const projectNameInput = document.querySelector("#name");
 const projectDescriptionInput = document.querySelector("#description");
@@ -11,6 +12,7 @@ const userCointainer = document.querySelector(".user");
 let editingProjectId = null;
 ProjectManager.loadProjects();
 loadStories();
+loadTasks();
 const handleEditRequest = (project) => {
     projectNameInput.value = project.name;
     projectDescriptionInput.value = project.description;
@@ -32,5 +34,10 @@ addButtonElement === null || addButtonElement === void 0 ? void 0 : addButtonEle
     ProjectManager.renderProjects(projectContainerElement, handleEditRequest);
 });
 ProjectManager.renderProjects(projectContainerElement, handleEditRequest);
-const loggedUser = new User(1, "Jan", "Nowak");
+let users = [
+    { id: 1, name: "Jan", surname: "Nowak", role: "admin" },
+    { id: 2, name: "Anna", surname: "Kowalski", role: "devops" },
+    { id: 3, name: "Dominik", surname: "Bakuła", role: "developer" }
+];
+const loggedUser = users[0];
 renderUser(loggedUser, userCointainer);

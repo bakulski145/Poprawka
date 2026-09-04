@@ -1,4 +1,6 @@
 import { Story, changeCondition, deleteStory, getStories } from "./story.js";
+import { addTask, getTasks, loadTasks } from "./task.js";
+import {renderTasks} from "./taskRender.js";
 
 export const renderStories = (storyListElement: HTMLElement, stories : Story[]) => {
     storyListElement.innerHTML = "";
@@ -37,6 +39,9 @@ export const renderStories = (storyListElement: HTMLElement, stories : Story[]) 
             const storyDescriptionElement = document.createElement("p");
             storyDescriptionElement.innerText = story.description;
 
+            const tasksListContainer = document.createElement("div");
+            tasksListContainer.id="tasks";
+
             const rowContainer = document.createElement("div");
             rowContainer.style.display = "flex";
             rowContainer.style.justifyContent = "space-between";
@@ -69,6 +74,13 @@ export const renderStories = (storyListElement: HTMLElement, stories : Story[]) 
                 renderStories(storyListElement,currentProjectStories);
             });
 
+            const addTaskButton = document.createElement("button");
+            addTaskButton.innerText = "Dodaj zadanie";
+            addTaskButton.addEventListener("click",(event:Event)=>{
+                event.preventDefault();
+                addTask({id: 1});
+            })
+
             const storyDeleteButton = document.createElement("button");
             storyDeleteButton.innerText = "Usuń";
             storyDeleteButton.addEventListener("click", (event: Event) => {
@@ -93,7 +105,11 @@ export const renderStories = (storyListElement: HTMLElement, stories : Story[]) 
             rowContainer.appendChild(storyConditionElement);
             storyElement.appendChild(storyNameElement);
             storyElement.appendChild(storyDescriptionElement);
+            storyElement.appendChild(tasksListContainer);
+            storyElement.appendChild(addTaskButton);
             storyElement.appendChild(storyDeleteButton);
+            const currentAllTasks = getTasks();
+            renderTasks(currentAllTasks, tasksListContainer);
         }
     });
 }

@@ -1,7 +1,7 @@
 import type { Project } from "./projects";
 
 export type Prio = "low" | "medium" | "high";
-type Condition = "todo" | "doing" | "done";
+export type Condition = "todo" | "doing" | "done";
 
 export let stories : Story[]=[];
 export class Story {
